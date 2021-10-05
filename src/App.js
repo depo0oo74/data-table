@@ -7,7 +7,7 @@ import axios from 'axios';
 function App() {
 
   const columns = [
-    {title : 'ID' , field : 'id'} ,
+    {title : 'ID' , field : 'id' , headerStyle : {background : 'red' , color : '#ffffff'}} ,
     {title : 'TITLE' , field : 'title'} ,
     {title : 'MESSAGE' , field : 'body'}
   ]
@@ -18,6 +18,13 @@ function App() {
       <MaterialTable
           title = "data table"
           columns = {columns}
+          options={{
+              paging:true,
+              pageSize:10,
+              emptyRowsWhenPaging: false,  
+              pageSizeOptions:[],
+              rowStyle : {background : '#eee'}   
+          }}
           data={query =>
               new Promise((resolve, reject) => {
                   let URL = 'https://jsonplaceholder.typicode.com/posts?'
@@ -35,7 +42,7 @@ function App() {
                     resolve({
                         data: res.data, 
                         page: query.page,
-                        totalCount: 200 ,
+                        totalCount: 100 ,
                     });
                   })
                   .catch(err => {
